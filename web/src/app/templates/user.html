@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="page-header">Информация о пользователе {{ user.name }}</h1>
+    {% if user %}
+        <ul class="list-unstyled">
+            <li>Недельная квота: {{ user.quota_week|to_mb }} MB ({{ user.quota_week }})</li>
+            <li>Скачано за неделю:{{ user.week_down|to_mb }} MB ({{ user.week_down }})</li>
+            <li>Отдано за неделю:{{ user.week_up|to_mb }} MB ({{ user.week_up }})</li>
+        </ul>
+        <ul class="list-unstyled">
+            <li>Месячная квота: {{ user.quota_month|to_mb }} MB ({{ user.quota_month }})</li>
+            <li>Скачано за месяц:{{ user.month_down|to_mb }} MB ({{ user.month_down }})</li>
+            <li>Отдано за месяц:{{ user.month_up|to_mb }} MB ({{ user.month_up }})</li>
+        </ul>
+        <p><a href="{{ url_for('home') }}">Назад</a></p>
+    {% else %}
+        <p>Данного пользователя нет в системе. Вернитесь на главную <a href="{{ url_for('home') }}">страницу</a></p>
+    {% endif %}
+{% endblock %}

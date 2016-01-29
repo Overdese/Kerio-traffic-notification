@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <ul class="list-unstyled">
+        <h1 class="page-header">Пользователи интернета</h1>
+        <p>Всего: {{ clients.count() }}</p>
+        {% for client in clients %}
+            <li>
+                <a href="{{ url_for('get_user', user_uuid=client.uuid) }}">{{ client.name }} -
+                {% for ip in client.ip %}
+                    {{ ip }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
